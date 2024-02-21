@@ -45,7 +45,7 @@ require_once SYSTEMPATH . 'Config/DotEnv.php';
 
 // Define ENVIRONMENT
 if (! defined('ENVIRONMENT')) {
-    define('ENVIRONMENT', env('CI_ENVIRONMENT', 'production'));
+    define('ENVIRONMENT', env('CI_ENVIRONMENT', 'development'));
 }
 
 // Load Config Cache
@@ -84,4 +84,8 @@ $app->run();
 
 // Exits the application, setting the exit code for CLI-based applications
 // that might be watching.
+
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 exit(EXIT_SUCCESS);
