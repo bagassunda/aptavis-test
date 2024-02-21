@@ -21,7 +21,7 @@ class Standings extends BaseController
             $draws = $matchModel->countDraws($club['id']);
             $losses = $matchesPlayed - $wins - $draws;
             $goalsFor = $matchModel->sumGoalsFor($club['id']);
-            $goalsAgainst = $matchModel->sumGoalsAgainst($club['id']); // Perlu ditambahkan implementasi di MatchModel
+            $goalsAgainst = $matchModel->sumGoalsAgainst($club['id']);
             $goalDifference = $goalsFor - $goalsAgainst;
 
             $standings[] = [
@@ -35,8 +35,6 @@ class Standings extends BaseController
                 'goal_difference' => $goalDifference
             ];
         }
-
-        // Di sini Anda dapat menyusun ulang array $standings berdasarkan peringkat jika diperlukan
 
         return view('standings', ['standings' => $standings]);
     }

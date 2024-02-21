@@ -19,6 +19,18 @@
         th {
             background-color: #f2f2f2;
         }
+        button[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            margin-top: 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            display: flex;
+            align-items: center margin: 0 auto;
+        }
+
     </style>
 </head>
 <body>
@@ -34,7 +46,7 @@
                 <th>K</th>
                 <th>GM</th>
                 <th>GK</th>
-                <th>GD</th>
+                <th>Points</th>
             </tr>
         </thead>
         <tbody>
@@ -53,5 +65,7 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+
+    <button type="submit" onclick="window.location.href = '<?php echo base_url('clubs'); ?>'">Klub Baru</button>
 </body>
 </html>

@@ -17,14 +17,15 @@ class Clubs extends BaseController
         ]);
 
         if (!$validation->withRequest($this->request)->run()) {
-            return view('input_club_form', ['validation' => $validation]); 
+            // return view('input_club_form', ['validation' => $validation]); 
+            return redirect()->back()->withInput()->with('error', 'Nama Club Sudah Terdaftar.');
         } else {
             $clubModel = new ClubModel();
             $clubModel->save([
                 'name' => $this->request->getPost('name')
             ]);
 
-            return redirect()->to('clubs');
+            return redirect()->to('clubs')->with('success', 'Club berhasil ditambahkan.');
         }
     }
 }

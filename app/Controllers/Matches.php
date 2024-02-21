@@ -29,6 +29,12 @@ class Matches extends BaseController
         $matchModel = new MatchModel();
         $homeTeamId = $this->request->getPost('home_team_id');
         $awayTeamId = $this->request->getPost('away_team_id');
+
+        if ($homeTeamId == $awayTeamId) {
+            return redirect()->back()->withInput()->with('error', 'Tuan rumah tidak dapat bertanding dengan dirinya sendiri.');
+        }
+
+        
         $homeTeamScore = $this->request->getPost('home_team_score');
         $awayTeamScore = $this->request->getPost('away_team_score');
 
