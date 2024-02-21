@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Models;
+
+use CodeIgniter\Model;
+
+class ClubModel extends Model
+{
+    protected $table = 'clubs';
+    protected $primaryKey = 'id';
+    protected $allowedFields = ['name', 'points']; 
+
+    protected $validationRules = [
+        'name' => 'required|is_unique[clubs.name]'
+    ];
+    public function getAllClubs()
+    {
+        return $this->findAll();
+    }
+
+    public function getClubById($id)
+    {
+        return $this->find($id);
+    }
+
+    public function updateStats($data)
+    {
+        
+        $homeTeam = $this->find($data[0]['id']);
+        $pointsHome['points'] = $homeTeam['points'] + $this->calculatePoints($data[0]['score'], $data[1]['score']);
+
+        $awayTeam = $this->find($data[1]['id']);
+        $pointsAway['points'] = $awayTeam['points'] + $this->calculatePoints($data[1]['score'], $data[0]['score']);
+
+        return $this->update($homeTeam['id'], $pointsHome) &&
+        $this->update($awayTeam['id'], $pointsAway);
+        
+    }
+
+    protected function calculatePoints($scoreTeam, $scoreAgainst)
+    {
+        if ($scoreTeam > $scoreAgainst) {
+            return 3;
+        } elseif ($scoreTeam == $scoreAgainst) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+}
